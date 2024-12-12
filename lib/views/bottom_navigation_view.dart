@@ -18,17 +18,33 @@ class MyBottomNavigation extends StatelessWidget {
         () => BottomNavigationBar(
           currentIndex: controller.currentIndex.value,
           onTap: controller.changeTabIndex,
-          selectedItemColor: const Color(0xFF4CAF81),
-          unselectedItemColor: Colors.grey,
-          items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Browse"),
-          BottomNavigationBarItem(icon: Icon(Icons.storefront_sharp), label: "Store"),
-          BottomNavigationBarItem(icon: Icon(Icons.horizontal_split_outlined), label: "Order History"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          type: BottomNavigationBarType.fixed,
+        selectedItemColor: const Color(0xFF4CAF81),
+        unselectedItemColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Browse',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.production_quantity_limits),
+            label: 'Product',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_bag_outlined),
+            label: 'Order History',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            label: 'Profile',
+      ),
         ],
         ),
-      ),
+      ),  
     );
   }
 }

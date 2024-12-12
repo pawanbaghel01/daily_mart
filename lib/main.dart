@@ -1,7 +1,10 @@
 import 'package:daily_mart/views/home_dashboard.dart';
 import 'package:daily_mart/views/loginpage_view.dart';
 import 'package:daily_mart/views/onboarding_page/onboarding.dart';
+import 'package:daily_mart/views/otpverificationpage_view.dart';
 import 'package:daily_mart/views/product_details.dart';
+import 'package:daily_mart/views/sendotppage_view.dart';
+import 'package:daily_mart/views/signuppage_view.dart';
 import 'package:daily_mart/views/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

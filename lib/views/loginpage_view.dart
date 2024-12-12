@@ -1,3 +1,4 @@
+import 'package:daily_mart/views/signuppage_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:daily_mart/controllers/auth_controller.dart';
@@ -171,8 +172,9 @@ class LoginPageView extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          Get.snackbar("Info", "Sign up clicked",
-                              snackPosition: SnackPosition.BOTTOM);
+                          // Get.snackbar("Info", "Sign up clicked",
+                          //     snackPosition: SnackPosition.BOTTOM);
+                          Get.offAll(SignUpPageView());
                         },
                         child: Text(
                           "Sign up",

@@ -66,6 +66,8 @@ flutter:
     - assets/Onboarding_3.png
     - assets/splash.png
     - assets/homeimage/home2.png
+    - assets/homeimage/home3.png
+    - assets/categories/
     - assets/details1.png
   #   - images/a_dot_ham.jpeg
 

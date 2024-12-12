@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../views/loginpage_view.dart';
+
 class OnboardingController extends GetxController {
   var currentIndex = 0.obs;
   var imagePath = "assets/Onboarding_1.png".obs; // Initial image path
@@ -21,7 +23,7 @@ class OnboardingController extends GetxController {
       text2.value ="infrastructure projects";
     }  else {
       // Navigate to the login page or any other page
-      //Get.offAll(LoginPageView());
+      Get.offAll(LoginPageView());
     }
   }
 }

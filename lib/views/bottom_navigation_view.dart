@@ -30,10 +30,10 @@ class MyBottomNavigation extends StatelessWidget {
             icon: Icon(Icons.search),
             label: 'Browse',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.production_quantity_limits),
-            label: 'Product',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.production_quantity_limits),
+          //   label: 'Product',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_bag_outlined),
             label: 'Order History',

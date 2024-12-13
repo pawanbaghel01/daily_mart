@@ -85,7 +85,7 @@ class OrderHistoryPage extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.teal,
                       ),
-                      child: const Text("Delivered"),
+                      child: const Text("Delivered",style: TextStyle(color: Colors.white),),
                     ),
                   ),
                 );

@@ -1,16 +1,15 @@
+import 'package:daily_mart/controllers/auth_controller.dart';
+import 'package:daily_mart/routes/app_pages.dart';
+import 'package:daily_mart/views/loginpage_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
-class ProfileController extends GetxController {
-  void logout() {
-    // Handle logout logic
-    print("User logged out!");
-  }
-}
+
 
 class ProfilePage extends StatelessWidget {
-  final ProfileController controller = Get.put(ProfileController());
+     final AuthController controller = Get.put(AuthController());
+
 
   ProfilePage({super.key});
 
@@ -104,7 +103,9 @@ class ProfilePage extends StatelessWidget {
         customButton("Feedback", () {}),
         customButton("Refer a Friend", () {}),
         customButton("Terms & Conditions", () {}),
-        customButton("Logout", () {}),
+        customButton("Logout", () {
+          Get.offAll(LoginPageView());
+        }),
       ],
     ),
   ),

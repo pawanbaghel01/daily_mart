@@ -1,4 +1,5 @@
 import 'package:daily_mart/controllers/home_controller.dart';
+import 'package:daily_mart/views/product_details.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -243,18 +244,25 @@ class HomeDashboard extends StatelessWidget {
      "assets/categories/petcare.jpeg"
     ];
     return SizedBox(
-      height: screenHeight * 0.16,
+      height: screenHeight * 0.3,
       child: GridView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 26,
+          mainAxisSpacing: 2,
           crossAxisSpacing: 8,
         ),
         itemBuilder: (context, index) {
-          return Container(
-            child: Image.asset(categories[index]),
+          return InkWell(
+            onTap: (){
+              Get.to(ProductDetailPage());
+            },
+            child: Container(
+              height: 200,
+              width: 100,
+              child: Image.asset(categories[index]),
+            ),
           );
         },
       ),

@@ -28,12 +28,9 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:daily_mart/models/user_model.dart';
-import 'package:daily_mart/routes/app_pages.dart';
 import 'package:daily_mart/views/bottom_navigation_view.dart';
-import 'package:daily_mart/views/home_dashboard.dart';
 import 'package:daily_mart/views/loginpage_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {

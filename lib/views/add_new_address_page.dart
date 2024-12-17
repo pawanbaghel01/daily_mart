@@ -1,4 +1,6 @@
+import 'package:daily_mart/views/addtocart_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddNewAddressPage extends StatelessWidget {
   const AddNewAddressPage({super.key});
@@ -45,7 +47,9 @@ class AddNewAddressPage extends StatelessWidget {
                   cutomTextField("State",stateController),
                   cutomTextField("ZipCode",zipcodeController),
                   const SizedBox(height: 20,),
-                  ElevatedButton(onPressed: (){}, child: Text("Save")),
+                  ElevatedButton(onPressed: (){
+                    Get.to(const AddToCartPage());
+                  }, child: const Text("Save")),
                 ],
               ),
             ),

@@ -1,3 +1,4 @@
+import 'package:daily_mart/views/addtocart_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -151,7 +152,9 @@ class ProductDetailPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(const AddToCartPage());
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
                         shape: RoundedRectangleBorder(

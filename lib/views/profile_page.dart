@@ -1,15 +1,11 @@
 import 'package:daily_mart/controllers/auth_controller.dart';
-import 'package:daily_mart/routes/app_pages.dart';
 import 'package:daily_mart/views/loginpage_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
-
-
 class ProfilePage extends StatelessWidget {
-     final AuthController controller = Get.put(AuthController());
-
+  final AuthController controller = Get.put(AuthController());
 
   ProfilePage({super.key});
 
@@ -42,7 +38,7 @@ class ProfilePage extends StatelessWidget {
             color: Colors.teal,
           ),
           const Positioned(
-            top: 2, 
+            top: 2,
             left: 20,
             child: Row(
               children: [
@@ -78,55 +74,60 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           Align(
-  alignment: Alignment.center,
-  child: Container(
-    width: MediaQuery.of(context).size.width * 0.9, // Reduce the width to 90% of the screen
-    height: MediaQuery.of(context).size.height * 0.5, // Reduce the height to 50% of the screen
-    margin: const EdgeInsets.symmetric(horizontal: 5),
-    padding: const EdgeInsets.all(10),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(15),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.1),
-          blurRadius: 10,
-          offset: const Offset(0, 5),
-        ),
-      ],
-    ),
-    child: ListView(
-      shrinkWrap: true,
-      children: [
-        customButton("Edit Profile", () {}),
-        customButton("Language & Currency", () {}),
-        customButton("Feedback", () {}),
-        customButton("Refer a Friend", () {}),
-        customButton("Terms & Conditions", () {}),
-        customButton("Logout", () {
-          Get.offAll(LoginPageView());
-        }),
-      ],
-    ),
-  ),
-)
-
+            alignment: Alignment.center,
+            child: Container(
+              width: MediaQuery.of(context).size.width *
+                  0.9, // Reduce the width to 90% of the screen
+              height: MediaQuery.of(context).size.height *
+                  0.45, // Reduce the height to 50% of the screen
+              margin: const EdgeInsets.symmetric(horizontal: 1),
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
+              ),
+              child: Column(
+                //shrinkWrap: true,
+                children: [
+                  customButton("Edit Profile", () {}),
+                  customButton("Language & Currency", () {}),
+                  customButton("Feedback", () {}),
+                  customButton("Refer a Friend", () {}),
+                  customButton("Terms & Conditions", () {}),
+                  customButton("Logout", () {
+                    Get.offAll(LoginPageView());
+                  }),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );
   }
 
-  Widget customButton(String btnName,Callback callback){
+  Widget customButton(String btnName, Callback callback) {
     return Column(
       children: [
         ListTile(
-          title: Text(btnName),
+          title: Text(btnName,style: TextStyle(fontSize: 17),),
           onTap: callback,
+          contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16.0), // Adjust padding as needed
+          dense: true, // Makes the ListTile more compact
         ),
         const Divider(
           color: Color(0xFFC2BDBD),
           thickness: 1.5,
-        )
+          height: 3, // Reduce spacing between the Divider and the ListTile
+        ),
       ],
     );
   }

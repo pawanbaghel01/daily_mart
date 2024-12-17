@@ -1,8 +1,10 @@
+import 'package:daily_mart/views/product_details.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
-class BrowsePage extends StatelessWidget {
-  const BrowsePage({super.key});
+class BeveragesPage extends StatelessWidget {
+  const BeveragesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class BrowsePage extends StatelessWidget {
         backgroundColor: primaryColor,
         elevation: 0,
         title: const Text(
-          'Browse',
+          'Beverages',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         actions: [
@@ -36,46 +38,46 @@ class BrowsePage extends StatelessWidget {
       body: Column(
         children: [
           // Search Bar
-          Container(
-            color: primaryColor,
-            child: Container(
-              margin: const EdgeInsets.all(16.0),
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.shade600,
-                    blurRadius: 6,
-                    spreadRadius: 2,
-                  ),
-                ],
-              ),
-              child: const Row(
-                children: [
-                  Icon(Icons.search, color: Colors.grey),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Search Product',
-                        hintStyle: TextStyle(color: Colors.grey),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // Container(
+          //   color: primaryColor,
+          //   child: Container(
+          //     margin: const EdgeInsets.all(16.0),
+          //     padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          //     decoration: BoxDecoration(
+          //       color: Colors.white,
+          //       borderRadius: BorderRadius.circular(30.0),
+          //       boxShadow: [
+          //         BoxShadow(
+          //           color: Colors.grey.shade600,
+          //           blurRadius: 6,
+          //           spreadRadius: 2,
+          //         ),
+          //       ],
+          //     ),
+          //     child: const Row(
+          //       children: [
+          //         Icon(Icons.search, color: Colors.grey),
+          //         SizedBox(width: 10),
+          //         Expanded(
+          //           child: TextField(
+          //             decoration: InputDecoration(
+          //               border: InputBorder.none,
+          //               hintText: 'Search Product',
+          //               hintStyle: TextStyle(color: Colors.grey),
+          //             ),
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           // Filter Buttons
           Container(
             color: primaryColor,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 2.0,vertical: 8),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _filterButton('Sort by',Icons.filter_list, Colors.white),
                   _filterButton('Location', Icons.location_on , Colors.white),
@@ -102,7 +104,7 @@ class BrowsePage extends StatelessWidget {
                   name: index % 2 == 0 ? 'Apple' : 'Orange',
                   price: 25,
                   callback: () {
-                    print("Buttun clicked");
+                   Get.to(ProductDetailPage());
                   },
                   oldPrice: index % 2 == 0 ? 35 : null,
                   brand: 'Tradly',

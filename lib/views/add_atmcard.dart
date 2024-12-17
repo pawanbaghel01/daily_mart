@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class AddCardPage extends StatefulWidget {
-  const AddCardPage({super.key});
+class AddATMCard extends StatefulWidget {
+  const AddATMCard({super.key});
 
   @override
-  State<AddCardPage> createState() => _AddCardPageState();
+  State<AddATMCard> createState() => _AddCardPageState();
 }
 
-class _AddCardPageState extends State<AddCardPage> {
+class _AddCardPageState extends State<AddATMCard> {
   String exDate = 'Expire date';
   String exYear = 'Expire year';
 
@@ -224,7 +224,7 @@ class _AddCardPageState extends State<AddCardPage> {
                               'Expire year',
                               '2024',
                               '2025',
-                              '2025',
+                              '2026',
                               '2027',
                               'etc'
                             ]

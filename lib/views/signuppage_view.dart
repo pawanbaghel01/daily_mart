@@ -1,6 +1,5 @@
 import 'package:daily_mart/controllers/auth_controller.dart';
 import 'package:daily_mart/views/loginpage_view.dart';
-import 'package:daily_mart/views/sendotppage_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

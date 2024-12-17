@@ -1,10 +1,15 @@
+import 'package:daily_mart/controllers/add_current_location.dart';
+import 'package:daily_mart/views/add_atmcard.dart';
+import 'package:daily_mart/views/add_new_address_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class CheckoutPage extends StatelessWidget {
-  const CheckoutPage({super.key});
+class AddToCartPage extends StatelessWidget {
+  const AddToCartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AddCurrentLocationController controller = Get.put(AddCurrentLocationController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.teal,
@@ -16,25 +21,46 @@ class CheckoutPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Add New Address Section
-            Container(
-              color: Colors.teal[50],
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "Add New Address",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.add, color: Colors.teal),
-                    onPressed: () {
-                      // Add Address Logic
-                    },
+            Obx(() => controller.currentAddress.value.isEmpty
+                ? Container(
+                    color: Colors.teal[50],
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.add, color: Colors.teal),
+                          onPressed: () {
+                            // Add Address Logic
+                            Get.to(const AddNewAddressPage());
+                          },
+                        ),
+                        const Text(
+                          "Add New Address",
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
                   )
-                ],
-              ),
-            ),
+                : Container(
+                    color: Colors.teal[50],
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                         Text(
+                          controller.currentAddress.value,
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Get.to(const AddNewAddressPage());
+                          },
+                          child: const Text("Change"),
+                        ),
+                      ],
+                    ),
+                  )),
             const Divider(thickness: 1, height: 0),
 
             // Cart Items Section
@@ -52,10 +78,15 @@ class CheckoutPage extends StatelessWidget {
                     },
                   ),
                   const Divider(thickness: 1, height: 20),
-                  TextButton(onPressed: (){}, child: Text("Remove",style:TextStyle(color: Colors.black,fontWeight: FontWeight.w200),))
-                  // Add more items here if needed
+                  TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        "Remove",
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w200),
+                      )),
                 ],
-              ),  
+              ),
             ),
 
             const Divider(thickness: 1, height: 0),
@@ -90,33 +121,37 @@ class CheckoutPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: Colors.teal,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-        ),
-        child: ElevatedButton(
-          onPressed: () {
-            // Checkout logic
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-          child: const Text(
-            "Proceed to Checkout",
-            style: TextStyle(
+      bottomNavigationBar: Obx(() => Container(
+            padding: const EdgeInsets.all(16),
+            decoration: const BoxDecoration(
               color: Colors.teal,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
             ),
-          ),
-        ),
-      ),
+            child: ElevatedButton(
+              onPressed: controller.currentAddress.value.isEmpty
+                  ? null // Disable button if address is empty
+                  : () {
+                      Get.to(const AddATMCard());
+                    },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: controller.currentAddress.value.isEmpty
+                    ? Colors.grey // Grey button when disabled
+                    : Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: const Text(
+                "Proceed to Checkout",
+                style: TextStyle(
+                  color: Colors.teal,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          )),
     );
   }
 
@@ -185,15 +220,12 @@ class CheckoutPage extends StatelessWidget {
             ],
           ),
         ),
-        // IconButton(
-        //   icon: const Icon(Icons.delete, color: Colors.red),
-        //   onPressed: onRemove,
-        // ),
       ],
     );
   }
 
-  Widget _buildPriceRow(String label, String value, {bool isTotal = false, String? info}) {
+  Widget _buildPriceRow(String label, String value,
+      {bool isTotal = false, String? info}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -206,13 +238,12 @@ class CheckoutPage extends StatelessWidget {
                 fontWeight: isTotal ? FontWeight.bold : FontWeight.w400,
               ),
             ),
-            if (info != null)
-              const SizedBox(width: 5),
-              const Icon(
-                Icons.info_outline,
-                size: 16,
-                color: Colors.grey,
-              ),
+            if (info != null) const SizedBox(width: 5),
+            const Icon(
+              Icons.info_outline,
+              size: 16,
+              color: Colors.grey,
+            ),
           ],
         ),
         Text(

@@ -1,46 +1,64 @@
-//import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
   String? id;
-  String? fistName;
+  String? firstName;
   String? lastName;
-  String? emailOrMobile;
+  String? email;
+  String? profileImage;
   String? password;
+  Timestamp? createdAt;
+  //String? lastOnlineStatus;
+  String? phone;
   String? confirmPassword;
- // Timestamp? createdOn;
+  String? fcmToken;
 
   UserModel({
-    required this.id,
-    required this.fistName,
-    required this.lastName,
-    required this.emailOrMobile,
-    required this.password,
-    required this.confirmPassword,
-    //required this.createdOn,
+    this.id,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.profileImage,
+    this.password,
+    this.phone,
+    this.createdAt,
+    //this.lastOnlineStatus,
+    //this.status,
+    this.confirmPassword,
+    this.fcmToken, 
   });
 
-  factory UserModel.fromDocumentSnapshot(//DocumentSnapshot 
-    Map<String,dynamic> doc) {
-    return UserModel(
-      id: doc['id'],
-      fistName: doc['fistName'],
-      lastName:doc['lastName'],
-      emailOrMobile: doc['emailOrMobile'],
-      password: doc['password'],
-      confirmPassword: doc['confirmPassword'],
-     // createdOn: doc['createdon'],
-    );
+  UserModel.fromJson(Map<String, dynamic> json) {
+    id = json["id"];
+    email = json["email"];
+    firstName = json["firstName"];
+    lastName = json["lastName"];
+    profileImage = json["profileImage"];
+    password = json["password"];
+    phone = json["phone"];
+    createdAt = json["CreatedAt"];
+    // lastOnlineStatus = json["LastOnlineStatus"];
+    // status = json["Status"];
+    confirmPassword = json["confirmPassword"];
+    fcmToken = json["fcmToken"];
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'fistName': fistName,
-      'lastName': lastName,
-      'emailOrMobile':emailOrMobile,
-      'Password': password,
-      'confirmPassword':confirmPassword,
-      //'createdOn':createdOn,
-    };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["firstName"] = firstName;
+    data["lastName"] = lastName;
+    data["email"] = email;
+    data["profileImage"] = profileImage;
+    data["password"] = password;
+    data["confirmPassword"] = confirmPassword;
+    data["CreatedAt"] = createdAt;
+    // data["LastOnlineStatus"] = lastOnlineStatus;
+    data["phone"] = phone;
+    // data["role"] = role;
+    data["fcmToken"] = fcmToken;
+    return data;
   }
 }
+

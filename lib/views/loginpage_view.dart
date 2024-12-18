@@ -1,3 +1,4 @@
+import 'package:daily_mart/controllers/onbording_status_controller.dart';
 import 'package:daily_mart/views/signuppage_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,7 @@ import 'package:daily_mart/controllers/auth_controller.dart';
 
 class LoginPageView extends StatelessWidget {
   final AuthController controller = Get.put(AuthController());
+  OnbordingStatusController onbordingStatusController = Get.put(OnbordingStatusController());
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -12,6 +14,7 @@ class LoginPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    onbordingStatusController.saveOnboardingStatus();
     // Get screen dimensions
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;

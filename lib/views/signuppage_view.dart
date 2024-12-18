@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpPageView extends StatefulWidget {
-  const SignUpPageView({Key? key}) : super(key: key);
+  const SignUpPageView({super.key});
 
   @override
   _SignUpPageViewState createState() => _SignUpPageViewState();
@@ -132,7 +132,7 @@ class _SignUpPageViewState extends State<SignUpPageView> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // Navigate to Send OTP Page
-                         controller.createUser(
+                        controller.signUp(
                         emailPhoneController.text,
                         firstNameController.text,
                         lastNameController.text,

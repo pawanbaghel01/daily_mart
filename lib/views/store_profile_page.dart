@@ -100,12 +100,12 @@ class StoreProfilePage extends StatelessWidget {
 
           // Follower and Product Counts
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 2, vertical: 16),
-            decoration: BoxDecoration(
+            margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 16),
+            decoration: const BoxDecoration(
               color: Colors.white,
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
+            child: const Padding(
+              padding: EdgeInsets.all(12.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

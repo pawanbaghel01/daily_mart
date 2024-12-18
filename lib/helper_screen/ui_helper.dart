@@ -60,7 +60,33 @@ class UiHelper {
     );
   }
 
-  helloPawan(){
+  helloPawan(){}
 
+ 
+  Widget primaryButton({ required String btnName,required IconData icon,required VoidCallback ontap}) {
+    return InkWell(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onTap: ontap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          //color: Theme.of(context).colorScheme.primary,
+          color:Colors.red,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon),
+            const SizedBox(width: 10),
+            Text(
+              btnName,
+              //style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

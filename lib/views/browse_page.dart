@@ -161,6 +161,7 @@ class BrowsePage extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(

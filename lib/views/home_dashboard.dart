@@ -325,7 +325,7 @@ class HomeDashboard extends StatelessWidget {
                         child: Image.asset(
                           products[index]["image"]!,
                           width: screenWidth * 0.35,
-                          height: screenHeight * 0.24,
+                          height: screenHeight * 0.2,
                           fit: BoxFit.cover,
                         ),
                       ),

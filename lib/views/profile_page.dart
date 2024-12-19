@@ -1,5 +1,6 @@
 import 'package:daily_mart/controllers/auth_controller.dart';
 import 'package:daily_mart/controllers/profile_update_controller.dart';
+import 'package:daily_mart/controllers/theme_controller.dart';
 import 'package:daily_mart/views/update_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,17 +9,19 @@ import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 class ProfilePage extends StatelessWidget {
   final AuthController controller = Get.put(AuthController());
   final ProfileController profileController = Get.put(ProfileController());
+  final ThemeController themeController = Get.put(ThemeController());
 
   ProfilePage({super.key});
   
   @override
   Widget build(BuildContext context) {
+    bool themeValue = true;
     final username = '${profileController.currentUser.value.firstName} ${profileController.currentUser.value.lastName}';
     final userEmail = '${profileController.currentUser.value.email}';
     return Scaffold(
+    backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: const Text('Profile'),
-        backgroundColor: Colors.teal,
         elevation: 0,
         actions: [
           IconButton(
@@ -39,7 +42,7 @@ class ProfilePage extends StatelessWidget {
         children: [
           Container(
             height: 250,
-            color: Colors.teal,
+            color: Theme.of(context).colorScheme.primary,
           ),
            Positioned(
             top: 2,
@@ -51,22 +54,22 @@ class ProfilePage extends StatelessWidget {
                   backgroundColor: Colors.white,
                   child: Text(
                     username[0],
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(username,
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(userEmail != ''? userEmail :profileController.currentUser.value.phone!,            
-                      style: TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white),
                     ),
-                    Text(
+                    const Text(
                       'info@tradly.co',
                       style: TextStyle(color: Colors.white),
                     ),
@@ -101,7 +104,10 @@ class ProfilePage extends StatelessWidget {
                   customButton("Edit Profile", () {
                     Get.to(UserUpdateProfile(userModel: profileController.currentUser.value));
                   }),
-                  customButton("Language & Currency", () {}),
+                  customButton("Language & Currency", () {
+                    themeController.themeChanger(themeValue);
+                    themeValue = !themeValue;
+                  }),
                   customButton("Feedback", () {}),
                   customButton("Refer a Friend", () {}),
                   customButton("Terms & Conditions", () {}),
@@ -121,7 +127,7 @@ class ProfilePage extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          title: Text(btnName,style: const TextStyle(fontSize: 17),),
+          title: Text(btnName,style: const TextStyle(fontSize: 17,color: Colors.black),),
           onTap: callback,
           contentPadding: const EdgeInsets.symmetric(
               horizontal: 16.0), // Adjust padding as needed

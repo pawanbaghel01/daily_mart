@@ -6,13 +6,9 @@ class BrowsePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Define the primary color used for the app bar and filter buttons
-    const Color primaryColor = Color(0xFF2D8C78);
-
     return Scaffold(
-      backgroundColor: const Color(0xFFEFF5F5),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: primaryColor,
         elevation: 0,
         title: const Text(
           'Browse',
@@ -37,7 +33,7 @@ class BrowsePage extends StatelessWidget {
         children: [
           // Search Bar
           Container(
-            color: primaryColor,
+            color: Theme.of(context).colorScheme.primary,
             child: Container(
               margin: const EdgeInsets.all(16.0),
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -71,7 +67,7 @@ class BrowsePage extends StatelessWidget {
           ),
           // Filter Buttons
           Container(
-            color: primaryColor,
+            color: Theme.of(context).colorScheme.primary,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 2.0,vertical: 8),
               child: Row(
@@ -147,6 +143,7 @@ class BrowsePage extends StatelessWidget {
     return InkWell(
       onTap: callback,
       child: Card(
+        // add background color in this card 
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         elevation: 2,
         child: Column(

@@ -15,9 +15,8 @@ class HomeDashboard extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF4CAF81),
         elevation: 0,
         title: const Text("Groceries"),
         actions: [

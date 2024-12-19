@@ -6,7 +6,7 @@ class OrderHistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFABC2C0),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: const Text('Order History'),
         backgroundColor: Colors.teal,
@@ -42,12 +42,12 @@ class OrderHistoryPage extends StatelessWidget {
                 SizedBox(width: 20),
                 Text(
                   "Transactions",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),
                 ),
                 Spacer(),
                 Text(
                   "January 2024",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),
                 ),
                 SizedBox(width: 20),
               ],
@@ -74,11 +74,11 @@ class OrderHistoryPage extends StatelessWidget {
                     
                     title: Padding(
                       padding: const EdgeInsets.only(left: 30),
-                      child: const Text("Coca Cola"),
+                      child: const Text("Coca Cola",style: TextStyle(color: Colors.black),),
                     ),
                     subtitle: Padding(
                       padding: const EdgeInsets.only(left: 30),
-                      child: const Text("MRP-25"),
+                      child: const Text("MRP-25",style: TextStyle(color: Colors.black),),
                     ),
                     trailing: ElevatedButton(
                       onPressed: () {},

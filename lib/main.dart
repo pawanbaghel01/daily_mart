@@ -1,4 +1,5 @@
 
+import 'package:daily_mart/Config/Themes.dart';
 import 'package:daily_mart/firebase_options.dart';
 import 'package:daily_mart/views/splash_view.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,6 +19,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
     );

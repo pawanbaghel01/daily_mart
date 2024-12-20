@@ -8,13 +8,9 @@ class BeveragesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Define the primary color used for the app bar and filter buttons
-    const Color primaryColor = Color(0xFF2D8C78);
-
     return Scaffold(
-      backgroundColor: const Color(0xFFEFF5F5),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: primaryColor,
         elevation: 0,
         title: const Text(
           'Beverages',
@@ -73,7 +69,7 @@ class BeveragesPage extends StatelessWidget {
           // ),
           // Filter Buttons
           Container(
-            color: primaryColor,
+            color: Theme.of(context).colorScheme.primary,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 2.0,vertical: 8),
               child: Row(
@@ -100,6 +96,7 @@ class BeveragesPage extends StatelessWidget {
               itemCount: 6, // Adjust based on data
               itemBuilder: (context, index) {
                 return _productCard(
+                  context: context,
                   image: 'assets/orangeImage.png', // Replace with actual image path
                   name: index % 2 == 0 ? 'Apple' : 'Orange',
                   price: 25,
@@ -139,6 +136,7 @@ class BeveragesPage extends StatelessWidget {
   }
 
   Widget _productCard({
+    required BuildContext context,
     required String image,
     required String name,
     required int price,
@@ -149,6 +147,7 @@ class BeveragesPage extends StatelessWidget {
     return InkWell(
       onTap: callback,
       child: Card(
+        color: Theme.of(context).colorScheme.primaryContainer,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         elevation: 2,
         child: Column(

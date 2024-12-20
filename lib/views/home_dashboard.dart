@@ -57,12 +57,12 @@ class HomeDashboard extends StatelessWidget {
             SizedBox(height: screenHeight * 0.02),
             // Search Bar
             Container(
-              color: Colors.transparent,
+             // color: Colors.amber,
               child: Container(
                 margin: const EdgeInsets.all(16.0),
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                   color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(30.0),
                   boxShadow: [
                     BoxShadow(
@@ -72,16 +72,17 @@ class HomeDashboard extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: const Row(
+                child:  Row(
                   children: [
-                    Icon(Icons.search, color: Colors.grey),
-                    SizedBox(width: 10),
+                    const Icon(Icons.search, color: Colors.grey),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: TextField(
                         decoration: InputDecoration(
-                          border: InputBorder.none,
                           hintText: 'Search Product',
-                          hintStyle: TextStyle(color: Colors.grey),
+                          fillColor:Theme.of(context).colorScheme.surface,
+                          filled: true,
+                          hintStyle: const TextStyle(color: Colors.grey),
                         ),
                       ),
                     ),
@@ -267,10 +268,17 @@ class HomeDashboard extends StatelessWidget {
             onTap: () {
               Get.to(const BeveragesPage());
             },
-            child: Container(
-              height: 200,
-              width: 100,
-              child: Image.asset(categories[index]),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 3),
+              child: Container(
+                height: 200,
+                width: 100,
+                decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                child: Image.asset(categories[index]),
+              ),
             ),
           );
         },
@@ -310,31 +318,38 @@ class HomeDashboard extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: screenHeight * 0.3,
+            height: screenHeight * 0.25,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: products.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.only(right: screenWidth * 0.03),
-                  child: Column(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(
-                          products[index]["image"]!,
-                          width: screenWidth * 0.35,
-                          height: screenHeight * 0.2,
-                          fit: BoxFit.cover,
+                  child: Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                    child: Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.asset(
+                            products[index]["image"]!,
+                            width: screenWidth * 0.35,
+                            height: screenHeight * 0.15,
+                            fit: BoxFit.cover,
+                          ),
+                        ),                        
+                        const Spacer(),
+                        Text(products[index]["name"]!),
+                        Text(
+                          products[index]["price"]!,
+                          style: const TextStyle(color: Colors.green),
                         ),
-                      ),
-                      SizedBox(height: screenHeight * 0.01),
-                      Text(products[index]["name"]!),
-                      Text(
-                        products[index]["price"]!,
-                        style: const TextStyle(color: Colors.green),
-                      ),
-                    ],
+                        SizedBox(height: screenHeight * 0.01),
+                      ],
+                    ),
                   ),
                 );
               },

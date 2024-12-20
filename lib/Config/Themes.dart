@@ -8,7 +8,7 @@ var lightTheme = ThemeData(
     backgroundColor: lAppBarColor,
   ),
   inputDecorationTheme: InputDecorationTheme(
-    fillColor: lOnBackgroundColor,
+    fillColor: lBackgroundColor,
     filled: true,
     border: UnderlineInputBorder(
       borderSide: BorderSide.none,
@@ -31,7 +31,7 @@ var darkTheme = ThemeData(
     backgroundColor: dAppBarColor,
   ),
   inputDecorationTheme: InputDecorationTheme(
-    fillColor: dBackgroundColor,
+    fillColor: dOnBackgroundColor,
     filled: true,
     border: UnderlineInputBorder(
       borderSide: BorderSide.none,

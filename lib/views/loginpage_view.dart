@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:daily_mart/controllers/auth_controller.dart';
 
+// ignore: must_be_immutable
 class LoginPageView extends StatelessWidget {
   final AuthController controller = Get.put(AuthController());
   OnbordingStatusController onbordingStatusController = Get.put(OnbordingStatusController());

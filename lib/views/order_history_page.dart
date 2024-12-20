@@ -9,7 +9,6 @@ class OrderHistoryPage extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: const Text('Order History'),
-        backgroundColor: Colors.teal,
         elevation: 0,
         actions: [
           IconButton(
@@ -36,18 +35,18 @@ class OrderHistoryPage extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.symmetric(vertical: 20),
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
+              children: [
                 SizedBox(width: 20),
                 Text(
                   "Transactions",
-                  style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),
+                  style: TextStyle(fontWeight: FontWeight.bold,)
                 ),
                 Spacer(),
                 Text(
                   "January 2024",
-                  style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(width: 20),
               ],
@@ -60,7 +59,7 @@ class OrderHistoryPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Card(
                   margin: const EdgeInsets.symmetric(vertical: 8),
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.primary,                   
                   child: ListTile(
                     leading: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
@@ -72,20 +71,20 @@ class OrderHistoryPage extends StatelessWidget {
                       ),
                     ),
                     
-                    title: Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: const Text("Coca Cola",style: TextStyle(color: Colors.black),),
+                    title: const Padding(
+                      padding: EdgeInsets.only(left: 30),
+                      child: Text("Coca Cola",),
                     ),
-                    subtitle: Padding(
-                      padding: const EdgeInsets.only(left: 30),
-                      child: const Text("MRP-25",style: TextStyle(color: Colors.black),),
+                    subtitle: const Padding(
+                      padding: EdgeInsets.only(left: 30),
+                      child: Text("MRP-25"),
                     ),
                     trailing: ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.teal,
+                       // backgroundColor: Colors.teal,
                       ),
-                      child: const Text("Delivered",style: TextStyle(color: Colors.white),),
+                      child: const Text("Delivered",),
                     ),
                   ),
                 );

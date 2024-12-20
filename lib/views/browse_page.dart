@@ -38,7 +38,7 @@ class BrowsePage extends StatelessWidget {
               margin: const EdgeInsets.all(16.0),
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(30.0),
                 boxShadow: [
                   BoxShadow(
@@ -48,14 +48,16 @@ class BrowsePage extends StatelessWidget {
                   ),
                 ],
               ),
-              child: const Row(
+              child: Row(
                 children: [
                   Icon(Icons.search, color: Colors.grey),
                   SizedBox(width: 10),
                   Expanded(
                     child: TextField(
                       decoration: InputDecoration(
-                        border: InputBorder.none,
+                       // border: InputBorder.none,
+                       fillColor: Theme.of(context).colorScheme.surface,
+                       filled: true,
                         hintText: 'Search Product',
                         hintStyle: TextStyle(color: Colors.grey),
                       ),
@@ -94,6 +96,7 @@ class BrowsePage extends StatelessWidget {
               itemCount: 6, // Adjust based on data
               itemBuilder: (context, index) {
                 return _productCard(
+                  context: context,
                   image: 'assets/orangeImage.png', // Replace with actual image path
                   name: index % 2 == 0 ? 'Apple' : 'Orange',
                   price: 25,
@@ -133,6 +136,7 @@ class BrowsePage extends StatelessWidget {
   }
 
   Widget _productCard({
+    required BuildContext context,
     required String image,
     required String name,
     required int price,
@@ -143,7 +147,7 @@ class BrowsePage extends StatelessWidget {
     return InkWell(
       onTap: callback,
       child: Card(
-        // add background color in this card 
+        color: Theme.of(context).colorScheme.primaryContainer,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         elevation: 2,
         child: Column(

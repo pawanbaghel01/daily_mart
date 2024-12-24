@@ -12,14 +12,14 @@ class ProfilePage extends StatelessWidget {
   final ThemeController themeController = Get.put(ThemeController());
 
   ProfilePage({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
-    bool themeValue = true;
-    final username = '${profileController.currentUser.value.firstName} ${profileController.currentUser.value.lastName}';
+    final username =
+        '${profileController.currentUser.value.firstName} ${profileController.currentUser.value.lastName}';
     final userEmail = '${profileController.currentUser.value.email}';
     return Scaffold(
-    backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: const Text('Profile'),
         elevation: 0,
@@ -44,7 +44,7 @@ class ProfilePage extends StatelessWidget {
             height: 250,
             color: Theme.of(context).colorScheme.primary,
           ),
-           Positioned(
+          Positioned(
             top: 2,
             left: 20,
             child: Row(
@@ -54,7 +54,10 @@ class ProfilePage extends StatelessWidget {
                   backgroundColor: Colors.white,
                   child: Text(
                     username[0],
-                    style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
                   ),
                 ),
                 const SizedBox(width: 20),
@@ -62,11 +65,15 @@ class ProfilePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(username,
+                    Text(
+                      username,
                       style: const TextStyle(color: Colors.white, fontSize: 18),
                     ),
                     const SizedBox(height: 5),
-                    Text(userEmail != ''? userEmail :profileController.currentUser.value.phone!,            
+                    Text(
+                      userEmail != ''
+                          ? userEmail
+                          : profileController.currentUser.value.phone!,
                       style: const TextStyle(color: Colors.white),
                     ),
                     const Text(
@@ -88,7 +95,7 @@ class ProfilePage extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 1),
               padding: const EdgeInsets.all(2),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.primaryContainer,
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
@@ -102,17 +109,20 @@ class ProfilePage extends StatelessWidget {
                 //shrinkWrap: true,
                 children: [
                   customButton("Edit Profile", () {
-                    Get.to(UserUpdateProfile(userModel: profileController.currentUser.value));
+                    Get.to(UpdateProfilePage(
+                        userModel: profileController.currentUser.value));
                   }),
-                  customButton("Language & Currency", () {
-                    themeController.themeChanger(themeValue);
-                    themeValue = !themeValue;
+                  customButton("Change Theme", () {
+                    print("button tapped");
+                    print(themeController.isDark.value);
+                    themeController.themeChanger(themeController.isDark.value);
                   }),
+                  //customButton("Language & Currency",(){}),
                   customButton("Feedback", () {}),
                   customButton("Refer a Friend", () {}),
                   customButton("Terms & Conditions", () {}),
                   customButton("Logout", () {
-                   controller.logoutUser();
+                    controller.logoutUser();
                   }),
                 ],
               ),
@@ -127,7 +137,10 @@ class ProfilePage extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          title: Text(btnName,style: const TextStyle(fontSize: 17,color: Colors.black),),
+          title: Text(
+            btnName,
+            style: const TextStyle(fontSize: 17),
+          ),
           onTap: callback,
           contentPadding: const EdgeInsets.symmetric(
               horizontal: 16.0), // Adjust padding as needed

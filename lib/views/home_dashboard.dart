@@ -15,6 +15,7 @@ class HomeDashboard extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         elevation: 0,
@@ -66,7 +67,7 @@ class HomeDashboard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30.0),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.shade300,
+                      color: Colors.grey.shade600,
                       blurRadius: 6,
                       spreadRadius: 2,
                     ),
@@ -74,7 +75,8 @@ class HomeDashboard extends StatelessWidget {
                 ),
                 child:  Row(
                   children: [
-                    const Icon(Icons.search, color: Colors.grey),
+                    const Icon(Icons.search,// color: Colors.grey
+                    ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: TextField(
@@ -82,6 +84,7 @@ class HomeDashboard extends StatelessWidget {
                           hintText: 'Search Product',
                           fillColor:Theme.of(context).colorScheme.surface,
                           filled: true,
+                          hoverColor: Theme.of(context).colorScheme.surface,
                           hintStyle: const TextStyle(color: Colors.grey),
                         ),
                       ),

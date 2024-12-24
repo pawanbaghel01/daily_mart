@@ -1,155 +1,224 @@
+import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:daily_mart/controllers/auth_controller.dart';
+import 'package:daily_mart/controllers/image_picker_controller.dart';
+import 'package:daily_mart/controllers/profile_update_controller.dart';
 import 'package:daily_mart/helper_screen/ui_helper.dart';
 import 'package:daily_mart/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
-class UserUpdateProfile extends StatelessWidget {
+class UpdateProfilePage extends StatelessWidget {
   final UserModel userModel;
-  const UserUpdateProfile({super.key, required this.userModel});
+  const UpdateProfilePage({super.key, required this.userModel});
 
   @override
   Widget build(BuildContext context) {
-    RxBool isEnable = false.obs;
-    TextEditingController name = TextEditingController(text: userModel.firstName);
-    TextEditingController lastName = TextEditingController(text: userModel.lastName);
-    TextEditingController emailOrMobile = TextEditingController(text: userModel.email);
+    RxBool isEdit = false.obs;
+    ProfileController profileController = Get.put(ProfileController());
+    TextEditingController firstName =
+        TextEditingController(text: userModel.firstName);
+    TextEditingController lastName =
+        TextEditingController(text: userModel.lastName);
+    TextEditingController email = TextEditingController(text: userModel.email);
+    TextEditingController phone = TextEditingController(text: userModel.phone);
+    // TextEditingController about =
+    //     TextEditingController(text: profileController.currentUser.value.about);
+    ImagePickerController imagePickerController =
+        Get.put(ImagePickerController());
+    RxString imagePath = "".obs;
 
+    AuthController authController = Get.put(AuthController());
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: const Text("Update Profile"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              authController.logoutUser();
+            },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                ),
-                child: Row(children: [
+        child: ListView(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              // height: 300,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primaryContainer,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                children: [
                   Expanded(
-                      child: Column(
-                    children: [
-                      Container(
-                        width: 200,
-                        height: 200,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.onSurface,
-                          borderRadius: BorderRadius.circular(
-                            100,
-                          ),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Obx(
+                              () => isEdit.value
+                                  ? InkWell(
+                                      splashColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        imagePath.value =
+                                            await imagePickerController
+                                                .pickImage(ImageSource.gallery);
+                                        print("Image Picked" + imagePath.value);
+                                      },
+                                      child: Container(
+                                        height: 200,
+                                        width: 200,
+                                        decoration: BoxDecoration(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .surface,
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                        ),
+                                        child: imagePath.value == ""
+                                            ? const Icon(
+                                                Icons.add,
+                                              )
+                                            : ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                child: Image.file(
+                                                  File(imagePath.value),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                      ),
+                                    )
+                                  : Container(
+                                      height: 200,
+                                      width: 200,
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .background,
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                      ),
+                                      child: userModel.profileImage == null ||
+                                              userModel.profileImage == ""
+                                          ? const Icon(
+                                              Icons.image,
+                                            )
+                                          : ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              child: CachedNetworkImage(
+                                                imageUrl: userModel
+                                                    .profileImage!,
+                                                fit: BoxFit.cover,
+                                                placeholder: (context, url) =>
+                                                    const CircularProgressIndicator(),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        const Icon(Icons.error),
+                                              )),
+                                    ),
+                            )
+                          ],
                         ),
-                        child: Container(
-                          width: 150,
-                          height: 150,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(100),
-                            child: CachedNetworkImage(
-                              imageUrl: userModel.profileImage ?? 'assets/splash.png',
-                                 // AssetsImage.defaultProfileUrl,//add default image path
-                              fit: BoxFit.cover,
-                              placeholder: (context, url) =>
-                                  const CircularProgressIndicator(),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
+                        const SizedBox(height: 20),
+                        Obx(
+                          () => TextField(
+                            controller: firstName,
+                            enabled: isEdit.value,
+                            decoration: InputDecoration(
+                              filled: isEdit.value,
+                              labelText: "Name",
+                              prefixIcon: const Icon(
+                                Icons.person,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      Row(
-                        children: [
-                          Text(
-                            "Personal Info",
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-                      Row(
-                        children: [
-                          Text(
-                            "Name",
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      TextField(
-                        controller: name,
-                        enabled: isEnable.value,
-                        textInputAction: TextInputAction.next,
-                        decoration: const InputDecoration(
-                          hintText: "User Name",
-                          prefixIcon: Icon(
-                            Icons.person,
+                        const SizedBox(height: 10),
+                        // Obx(
+                        //   () => TextField(
+                        //     controller: about,
+                        //     enabled: isEdit.value,
+                        //     decoration: InputDecoration(
+                        //       filled: isEdit.value,
+                        //       labelText: "About",
+                        //       prefixIcon: const Icon(
+                        //         Icons.info,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        TextField(
+                          controller: email,
+                          enabled: false,
+                          decoration: InputDecoration(
+                            filled: isEdit.value,
+                            labelText: "Email",
+                            prefixIcon: const Icon(
+                              Icons.alternate_email,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      Row(
-                        children: [
-                          Text(
-                            "Last Name",
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                       TextField(
-                        controller: lastName,
-                        enabled: isEnable.value,
-                        textInputAction: TextInputAction.next,
-                        decoration: const InputDecoration(
-                          hintText: "Last Name",
-                          prefixIcon: Icon(
-                            Icons.alternate_email_rounded,
+                        Obx(
+                          () => TextField(
+                            controller: phone,
+                            enabled: isEdit.value,
+                            decoration: InputDecoration(
+                              filled: isEdit.value,
+                              labelText: "Number",
+                              prefixIcon: const Icon(
+                                Icons.phone,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      Row(
-                        children: [
-                          Text(
-                            "Phone Number/ Email",
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                       TextField(
-                        controller:emailOrMobile,
-                        enabled: isEnable.value,
-                        textInputAction: TextInputAction.next,
-                        decoration: const InputDecoration(
-                          hintText: "Email/Phone",
-                          prefixIcon: Icon(
-                            Icons.phone,
-                          ),
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Obx(
+                              () => isEdit.value
+                                  ? UiHelper().primaryButton(
+                                      btnName: "Save",
+                                      icon: Icons.save,
+                                      ontap: () async {
+                                        await profileController.updateProfile(
+                                          imagePath.value,
+                                          firstName.text,
+                                          lastName.text,
+                                          phone.text,
+                                        );
+                                        isEdit.value = false;
+                                      },
+                                    )
+                                  : UiHelper().primaryButton(
+                                      btnName: "Edit",
+                                      icon: Icons.edit,
+                                      ontap: () {
+                                        isEdit.value = true;
+                                      },
+                                    ),
+                            )
+                          ],
                         ),
-                      ),
-                      const SizedBox(height: 40),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                         UiHelper().primaryButton(
-                            btnName: "Save",
-                            icon: Icons.save,
-                            ontap: () {},
-                          ),
-                        ],
-                      )
-                    ],
-                  ))
-                ]),
-              )
-            ],
-          ),
+                        const SizedBox(height: 20),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

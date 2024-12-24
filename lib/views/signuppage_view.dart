@@ -3,16 +3,12 @@ import 'package:daily_mart/views/loginpage_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignUpPageView extends StatefulWidget {
-  const SignUpPageView({super.key});
+class SignUpPageView extends StatelessWidget {
+  SignUpPageView({Key? key}) : super(key: key);
 
-  @override
-  _SignUpPageViewState createState() => _SignUpPageViewState();
-}
-
-class _SignUpPageViewState extends State<SignUpPageView> {
   final _formKey = GlobalKey<FormState>();
   final AuthController controller = Get.put(AuthController());
+
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailPhoneController = TextEditingController();
@@ -30,7 +26,7 @@ class _SignUpPageViewState extends State<SignUpPageView> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
-            Navigator.pop(context);
+            Get.back(); // Using GetX for navigation
           },
         ),
       ),
@@ -128,33 +124,41 @@ class _SignUpPageViewState extends State<SignUpPageView> {
                   },
                 ),
                 const SizedBox(height: 30),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      // Navigate to Send OTP Page
-                        controller.signUp(
-                        emailPhoneController.text,
-                        firstNameController.text,
-                        lastNameController.text,
-                        passwordController.text,
-                        confirmPasswordController.text); // Adjust route as necessary
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                Obx(() {
+                  return ElevatedButton(
+                    onPressed: controller.isLoading.value
+                        ? null
+                        : () {
+                            if (_formKey.currentState!.validate()) {
+                              controller.signUp(
+                                emailPhoneController.text,
+                                firstNameController.text,
+                                lastNameController.text,
+                                passwordController.text,
+                                confirmPasswordController.text,
+                              );
+                            }
+                          },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      minimumSize: const Size(double.infinity, 50),
                     ),
-                    minimumSize: const Size(double.infinity, 50),
-                  ),
-                  child: const Text(
-                    "Create",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Color(0xFF4CAF87),
-                    ),
-                  ),
-                ),
+                    child: controller.isLoading.value
+                        ? const CircularProgressIndicator(
+                            color: Color(0xFF4CAF87),
+                          )
+                        : const Text(
+                            "Create",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Color(0xFF4CAF87),
+                            ),
+                          ),
+                  );
+                }),
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -168,11 +172,12 @@ class _SignUpPageViewState extends State<SignUpPageView> {
                         Get.offAll(LoginPageView());
                       },
                       child: const Text(
-                        "Sign in",
+                        "Create Account",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 18),
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ],

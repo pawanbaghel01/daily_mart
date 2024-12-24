@@ -31,7 +31,7 @@ var darkTheme = ThemeData(
     backgroundColor: dAppBarColor,
   ),
   inputDecorationTheme: InputDecorationTheme(
-    fillColor: dOnBackgroundColor,
+    fillColor: dBackgroundColor,
     filled: true,
     border: UnderlineInputBorder(
       borderSide: BorderSide.none,
@@ -44,7 +44,7 @@ var darkTheme = ThemeData(
     surface: dBackgroundColor,
     onSurface: dOnBackgroundColor,
     primaryContainer: dContainerColor,
-    onPrimaryContainer: donContainerColor,
+    onPrimaryContainer: dOnContainerColor,
   ),
   // textTheme: const TextTheme(
   //   headlineLarge: TextStyle(

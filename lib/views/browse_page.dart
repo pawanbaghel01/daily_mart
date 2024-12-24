@@ -50,16 +50,17 @@ class BrowsePage extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  Icon(Icons.search, color: Colors.grey),
-                  SizedBox(width: 10),
+                  const Icon(Icons.search, color: Colors.grey),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: TextField(
                       decoration: InputDecoration(
                        // border: InputBorder.none,
                        fillColor: Theme.of(context).colorScheme.surface,
                        filled: true,
+                        hoverColor: Theme.of(context).colorScheme.surface,
                         hintText: 'Search Product',
-                        hintStyle: TextStyle(color: Colors.grey),
+                        hintStyle: const TextStyle(color: Colors.grey),
                       ),
                     ),
                   ),

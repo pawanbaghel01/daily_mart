@@ -7,7 +7,6 @@ class MyBottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Instantiate the BottomNavController
     final BottomNavController controller = Get.put(BottomNavController());
 
     return Scaffold(
@@ -19,32 +18,28 @@ class MyBottomNavigation extends StatelessWidget {
           currentIndex: controller.currentIndex.value,
           onTap: controller.changeTabIndex,
           type: BottomNavigationBarType.fixed,
-        selectedItemColor: const Color(0xFF4CAF81),
-        unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Browse',
-          ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.production_quantity_limits),
-          //   label: 'Product',
-          // ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag_outlined),
-            label: 'Order History',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Profile',
-      ),
-        ],
+          selectedItemColor: Theme.of(context).colorScheme.primary,
+          unselectedItemColor: Colors.grey,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'Browse',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_bag_outlined),
+              label: 'Order History',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_outline),
+              label: 'Profile',
+            ),
+          ],
         ),
-      ),  
+      ),
     );
   }
 }

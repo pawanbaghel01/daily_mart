@@ -123,7 +123,7 @@ class LoginPageView extends StatelessWidget {
                           ? null
                           : () {
                               controller.login(emailController.text,
-                                  passwordController.text);
+                              passwordController.text);
                             },
                       style: ElevatedButton.styleFrom(
                         fixedSize: Size(screenWidth * 0.8, screenHeight * 0.07),
@@ -135,7 +135,7 @@ class LoginPageView extends StatelessWidget {
                       ),
                       child: controller.isLoading.value
                           ? CircularProgressIndicator(
-                              color: const Color(0xFF4CAF81),
+                              color: const Color(0xFF0B3A92),
                               strokeWidth: screenWidth * 0.01,
                             )
                           : Text(

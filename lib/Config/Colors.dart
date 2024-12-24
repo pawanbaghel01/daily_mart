@@ -13,5 +13,5 @@ const dBackgroundColor = Color(0xFF121212); // Use a typical dark background col
 const dPrimarColor = Color(0xFF0057FF);
 const dContainerColor = Color(0xFF1E1E1E); // A dark container color
 const dOnBackgroundColor = Color(0xFF9E9E9E);// for text on the screen
-const donContainerColor = Color(0xFFFFFFFF);
+const dOnContainerColor = Color(0xFFFFFFFF);
 const dAppBarColor = Color(0xFF0057FF); // Dark-themed AppBar color

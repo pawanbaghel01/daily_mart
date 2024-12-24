@@ -43,7 +43,7 @@ class ProfileController extends GetxController {
         lastName: lastName,
         profileImage:
             imageUrl == "" ? currentUser.value.profileImage : imageLink,
-        //phoneNumber: number,
+        phone: number,
       );
       await db.collection("users").doc(auth.currentUser!.uid).set(
             updatedUser.toJson(),
@@ -72,31 +72,5 @@ class ProfileController extends GetxController {
     }
     return "";
   }
-
-  //  Future<String> currentUserName() async {
-  //   try {
-  //     // Fetch the current user's document from Firestore
-  //     DocumentSnapshot userDoc =
-  //         await db.collection("users").doc(auth.currentUser!.uid).get();
-
-  //     // Ensure the document exists and the data is not null
-  //     if (userDoc.exists && userDoc.data() != null) {
-  //       // Cast the document data to a Map
-  //       Map<String, dynamic>? userData = userDoc.data() as Map<String, dynamic>?;
-
-  //       // Check if the 'name' field exists and return it, else provide a default
-  //       print('line no 186');
-  //       print(userData?["name"]);
-  //       return userData?["name"] ?? "Unknown User";
-  //     } else {
-  //       print('line no 190');
-  //       return "User not found";
-  //     }
-  //   } catch (e) {
-  //     // Handle any errors that occur during Firestore fetching
-  //     print("Error fetching user name: $e");
-  //     return "Error fetching user name";
-  //   }
-  // }
 
 }

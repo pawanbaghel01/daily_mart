@@ -15,7 +15,7 @@ class _AddCardPageState extends State<AddATMCard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.teal,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: const Text("Add Card"),
         centerTitle: true,
       ),

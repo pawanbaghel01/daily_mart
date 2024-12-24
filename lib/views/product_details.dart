@@ -12,11 +12,12 @@ class ProductDetailController extends GetxController {
 
 class ProductDetailPage extends StatelessWidget {
   final ProductDetailController controller = Get.put(ProductDetailController());
+  ProductDetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: Column(
           children: [
@@ -71,15 +72,15 @@ class ProductDetailPage extends StatelessWidget {
                     "Coca Cola",
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  const Row(
+                   Row(
                     children: [
                       Text(
                         "\$25",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green),
+                            fontSize: 20, fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.primary),
                       ),
-                      SizedBox(width: 8),
-                      Text(
+                      const SizedBox(width: 8),
+                      const Text(
                         "\$50",
                         style: TextStyle(
                           fontSize: 16,
@@ -87,10 +88,10 @@ class ProductDetailPage extends StatelessWidget {
                           decoration: TextDecoration.lineThrough,
                         ),
                       ),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       Text(
                         "50% off",
-                        style: TextStyle(fontSize: 16, color: Colors.green),
+                        style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.primary),
                       ),
                     ],
                   ),
@@ -98,18 +99,18 @@ class ProductDetailPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Row(
+                       Row(
                         children: [
                           CircleAvatar(
                             radius: 20,
-                            backgroundColor: Colors.green,
-                            child: Text(
+                            backgroundColor: Theme.of(context).colorScheme.primary,
+                            child: const Text(
                               "T",
                               style: TextStyle(color: Colors.white, fontSize: 18),
                             ),
                           ),
-                          SizedBox(width: 8),
-                          Text(
+                          const SizedBox(width: 8),
+                          const Text(
                             "Tradly Store",
                             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                           ),
@@ -123,7 +124,7 @@ class ProductDetailPage extends StatelessWidget {
                                 ? Colors.black
                                 : Colors.white, backgroundColor: controller.isFollowing.value
                                 ? Colors.grey[300]
-                                : Colors.green,
+                                : Theme.of(context).colorScheme.primary,
                           ),
                           child: Text(
                             controller.isFollowing.value ? "Following" : "Follow",
@@ -148,7 +149,7 @@ class ProductDetailPage extends StatelessWidget {
                       "Lobortis cras placerat diam ipsum ut. Nisi vel adipiscing "
                       "massa bibendum diam. Suspendisse mattis dui maecenas duis mattis. "
                       "Mattis aliquam at arcu, semper nunc.",
-                      style: TextStyle(fontSize: 14, color: Colors.black87),
+                      style: TextStyle(fontSize: 14),
                     ),
                     const SizedBox(height: 16),
                     ElevatedButton(
@@ -156,7 +157,7 @@ class ProductDetailPage extends StatelessWidget {
                         Get.to(const AddToCartPage());
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -165,7 +166,7 @@ class ProductDetailPage extends StatelessWidget {
                       ),
                       child: const Text(
                         "Add To Cart",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,color: Colors.white),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -198,7 +199,7 @@ class ProductDetailPage extends StatelessWidget {
                     const SizedBox(height: 8),
                     const Text(
                       "Delivery Details: Home Delivery Available, Cash On Delivery",
-                      style: TextStyle(fontSize: 14, color: Colors.black87),
+                      style: TextStyle(fontSize: 14,),
                     ),
                     const SizedBox(height: 10,),
                   ],

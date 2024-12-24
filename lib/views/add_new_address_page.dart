@@ -16,7 +16,6 @@ class AddNewAddressPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.teal,
         title: const Text("Add a new address"),
         centerTitle: true,
       ),
@@ -47,9 +46,18 @@ class AddNewAddressPage extends StatelessWidget {
                   cutomTextField("State",stateController),
                   cutomTextField("ZipCode",zipcodeController),
                   const SizedBox(height: 20,),
-                  ElevatedButton(onPressed: (){
-                    Get.to(const AddToCartPage());
-                  }, child: const Text("Save")),
+                  ElevatedButton(
+                          onPressed: () {
+                            Get.to(const AddToCartPage());
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Theme.of(context).colorScheme.primary,
+                          ),
+                          child: Text(
+                            "Save",
+                            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+                          ),
+                        ),
                 ],
               ),
             ),

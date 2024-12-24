@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:daily_mart/controllers/add_current_location.dart';
 import 'package:daily_mart/views/add_atmcard.dart';
 import 'package:daily_mart/views/add_new_address_page.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class AddToCartPage extends StatelessWidget {
   const AddToCartPage({super.key});
@@ -11,8 +11,8 @@ class AddToCartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     AddCurrentLocationController controller = Get.put(AddCurrentLocationController());
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: Colors.teal,
         title: const Text("My Cart"),
         centerTitle: true,
       ),
@@ -23,40 +23,52 @@ class AddToCartPage extends StatelessWidget {
             // Add New Address Section
             Obx(() => controller.currentAddress.value.isEmpty
                 ? Container(
-                    color: Colors.teal[50],
+                    color: Theme.of(context).colorScheme.surfaceVariant,
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                          icon: const Icon(Icons.add, color: Colors.teal),
+                          icon: Icon(Icons.add, color: Theme.of(context).colorScheme.primary),
                           onPressed: () {
-                            // Add Address Logic
                             Get.to(const AddNewAddressPage());
                           },
                         ),
-                        const Text(
+                        Text(
                           "Add New Address",
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
                         ),
                       ],
                     ),
                   )
                 : Container(
-                    color: Colors.teal[50],
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                         Text(
+                        Text(
                           controller.currentAddress.value,
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
                         ),
                         ElevatedButton(
                           onPressed: () {
                             Get.to(const AddNewAddressPage());
                           },
-                          child: const Text("Change"),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Theme.of(context).colorScheme.primary,
+                          ),
+                          child: Text(
+                            "Change",
+                            style: TextStyle(color: Theme.of(context).colorScheme.onPrimary),
+                          ),
                         ),
                       ],
                     ),
@@ -68,8 +80,8 @@ class AddToCartPage extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  // Cart Item 1
                   _buildCartItem(
+                    context: context,
                     imagePath: "assets/orangeImage.png",
                     title: "Coca Cola",
                     price: "\$25",
@@ -77,14 +89,6 @@ class AddToCartPage extends StatelessWidget {
                       // Remove item logic
                     },
                   ),
-                  const Divider(thickness: 1, height: 20),
-                  TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        "Remove",
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w200),
-                      )),
                 ],
               ),
             ),
@@ -97,24 +101,20 @@ class AddToCartPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "Price Details",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: Colors.teal,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   const SizedBox(height: 10),
-                  _buildPriceRow("Price (1 item)", "\$25"),
+                  _buildPriceRow("Price (1 item)", "\$25", context: context),
                   const SizedBox(height: 8),
-                  _buildPriceRow("Delivery Fee", "Free", info: "info"),
+                  _buildPriceRow("Delivery Fee", "Free", context: context),
                   const Divider(thickness: 1, height: 20),
-                  _buildPriceRow(
-                    "Total Amount",
-                    "\$25",
-                    isTotal: true,
-                  ),
+                  _buildPriceRow("Total Amount", "\$25", isTotal: true, context: context),
                 ],
               ),
             ),
@@ -123,29 +123,29 @@ class AddToCartPage extends StatelessWidget {
       ),
       bottomNavigationBar: Obx(() => Container(
             padding: const EdgeInsets.all(16),
-            decoration: const BoxDecoration(
-              color: Colors.teal,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
             ),
             child: ElevatedButton(
               onPressed: controller.currentAddress.value.isEmpty
-                  ? null // Disable button if address is empty
+                  ? null
                   : () {
                       Get.to(const AddATMCard());
                     },
               style: ElevatedButton.styleFrom(
                 backgroundColor: controller.currentAddress.value.isEmpty
-                    ? Colors.grey // Grey button when disabled
-                    : Colors.white,
+                    ? Theme.of(context).disabledColor
+                    : Theme.of(context).colorScheme.primary,
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 "Proceed to Checkout",
                 style: TextStyle(
-                  color: Colors.teal,
+                  color: Theme.of(context).colorScheme.onPrimary,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -156,6 +156,7 @@ class AddToCartPage extends StatelessWidget {
   }
 
   Widget _buildCartItem({
+    required BuildContext context,
     required String imagePath,
     required String title,
     required String price,
@@ -179,44 +180,21 @@ class AddToCartPage extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               const SizedBox(height: 5),
-              Row(
-                children: [
-                  Text(
-                    price,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.teal,
-                    ),
-                  ),
-                  const Spacer(),
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          // Decrease quantity
-                        },
-                        icon: const Icon(Icons.remove_circle_outline),
-                        color: Colors.teal,
-                      ),
-                      const Text("1"),
-                      IconButton(
-                        onPressed: () {
-                          // Increase quantity
-                        },
-                        icon: const Icon(Icons.add_circle_outline),
-                        color: Colors.teal,
-                      ),
-                    ],
-                  ),
-                ],
-              )
+              Text(
+                price,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
             ],
           ),
         ),
@@ -224,34 +202,29 @@ class AddToCartPage extends StatelessWidget {
     );
   }
 
-  Widget _buildPriceRow(String label, String value,
-      {bool isTotal = false, String? info}) {
+  Widget _buildPriceRow(
+    String label,
+    String value, {
+    bool isTotal = false,
+    required BuildContext context,
+  }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            Text(
-              label,
-              style: TextStyle(
-                fontSize: isTotal ? 16 : 14,
-                fontWeight: isTotal ? FontWeight.bold : FontWeight.w400,
-              ),
-            ),
-            if (info != null) const SizedBox(width: 5),
-            const Icon(
-              Icons.info_outline,
-              size: 16,
-              color: Colors.grey,
-            ),
-          ],
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: isTotal ? 16 : 14,
+            fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
         ),
         Text(
           value,
           style: TextStyle(
             fontSize: isTotal ? 16 : 14,
-            fontWeight: isTotal ? FontWeight.bold : FontWeight.w400,
-            color: isTotal ? Colors.teal : Colors.black,
+            fontWeight: isTotal ? FontWeight.bold : FontWeight.normal,
+            color: isTotal ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onSurface,
           ),
         ),
       ],
